@@ -58,6 +58,10 @@
 				// Insert Data in Database
 				if( insert_post($datetime, $title, $content, $author, $excerpt, $img_name, $category, $tags) ) {
 
+					if(! empty($img_name)) {
+						$new_path = "uploads/posts/".$img_name;
+						move_uploaded_file( $img_tmp_name, $new_path);
+					}
 					echo "Success";
 
 				}
