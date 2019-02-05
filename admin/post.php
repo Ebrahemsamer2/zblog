@@ -15,6 +15,11 @@
 			$excerpt = filter_input(INPUT_POST,'excerpt' , FILTER_SANITIZE_STRING);
 			$tags = filter_input(INPUT_POST,'tags' , FILTER_SANITIZE_STRING);
 
+			$author = "Ebrahem"; // Temporary Author until creating admins
+
+			date_default_timezone_set("Africa/Cairo");
+			$datetime = date('M-D-Y h:m', time());
+
 			$image = $_FILES['image'];
 
 			$img_name = $image['name'];
@@ -51,6 +56,11 @@
 			if(empty($error_msg)) {
 
 				// Insert Data in Database
+				if( insert_post($datetime, $title, $content, $author, $excerpt, $img_name, $category, $tags) ) {
+
+					echo "Success";
+
+				}
 
 			}
 
