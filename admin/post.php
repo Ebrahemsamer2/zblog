@@ -28,7 +28,7 @@
 
 
 			$error_msg = "";
-			if(strlen($title) < 100 || strlen($title) > 200) {
+			if(strlen($title) < 50 || strlen($title) > 200) {
 				$error_msg = "Title must be between 100 and 200";
 			}else if(strlen($content) < 500 || strlen($content) > 10000) {
 				$error_msg = "Content must be between 500 and 10000";
@@ -63,13 +63,10 @@
 						move_uploaded_file( $img_tmp_name, $new_path);
 					}
 					echo "Success";
-
+				}else {
+					echo "unable to insert";
 				}
-
 			}
-
-
-
 		}
 	}
 

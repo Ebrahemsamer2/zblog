@@ -48,8 +48,8 @@
 					      </td>
 					      <td>
 					      	<?php 
-					      	if(strlen($post['content']) > 250 ){
-					      		echo substr($post['content'], 0,250) . '...';
+					      	if(strlen($post['content']) > 200 ){
+					      		echo substr($post['content'], 0,200) . '...';
 					      	}else {
 					      		echo $post['content'];
 					      	}
@@ -71,7 +71,8 @@
 
 					      <td class="action-links">
 					      	<a class="btn btn-primary btn-sm" href="">Edit</a>
-					      	<form action="deletepost.php" method="">
+					      	<form onsubmit="return confirm('Are You Sure?');" action="deletepost.php" method="POST">
+					      		<input type="hidden" name="id" value="<?php echo $post['id']; ?>">
 					      		<input class="btn btn-danger btn-sm" type="submit" value="Delete" name="deletepost">
 					      	</form>
 					      </td>
