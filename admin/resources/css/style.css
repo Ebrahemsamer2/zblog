@@ -4,7 +4,6 @@
 /* Global Style */
 body {
 	padding-top: 40px;
-	height: 1000px;
 }
 .col-sm-2 {
 	padding-left: 0;
@@ -79,8 +78,17 @@ body {
 
 
 
+.posts div table tbody td.action-links {
+	width: 130px;
+}
 
+.posts div table tbody td form {
+	display: inline;
+}
 
+.posts div table tbody td.title {
+	min-width: 200px;
+}
 
 .error {
 	color: red;

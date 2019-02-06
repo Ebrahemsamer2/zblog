@@ -18,7 +18,7 @@
 			$author = "Ebrahem"; // Temporary Author until creating admins
 
 			date_default_timezone_set("Africa/Cairo");
-			$datetime = date('M-D-Y h:m', time());
+			$datetime = date('M-d-Y h:m', time());
 
 			$image = $_FILES['image'];
 
