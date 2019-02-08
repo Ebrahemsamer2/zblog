@@ -7,7 +7,6 @@
 <?php 
 		$title = "";
 		$content = "";
-		$category = "";
 		$excerpt = "";
 		$tags = "";
 
@@ -38,7 +37,7 @@
 			}else if(strlen($content) < 500 || strlen($content) > 10000) {
 				$error_msg = "Content must be between 500 and 10000";
 			}else if(! empty($excerpt)){
-				if(strlen($excerpt) < 100 || strlen($content) > 500) {
+				if(strlen($excerpt) < 100 || strlen($excerpt) > 500) {
 					$error_msg = "Excerpt must be between 100 and 500";
 				}
 			}else {
@@ -71,8 +70,21 @@
 				}else {
 					echo "unable to insert";
 				}
+			}else {
+				echo $error_msg;
 			}
+		}else {
+
+			if(isset($_POST['updatepost'])){
+
+
+				
+				
+			}
+
 		}
+
+
 	}else if(isset($_GET['id'])){
 
 		$id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
@@ -97,7 +109,11 @@
 		</div>
 		<div class="col-sm">
 			<div class="post">
-				<h3>Add New Post</h3>
+				<?php if(isset($_GET['id'])) { ?>
+				<h4>Edit Post</h4>
+			<?php }else {
+				echo "<h4>Add New Post</h4>";
+			} ?>
 				<form action="post.php" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<input value="<?php echo $title; ?>" class="form-control" type="text" name="title" placeholder="Title" required autocomplete="off" >
@@ -111,15 +127,18 @@
 						<select class="form-control" name="category">
 							<?php 
 								foreach (get_categories() as $category) {
-									echo '<option value="$category" ';
-									if($category_name === $category['name']) {
-										echo "selected >";
+									echo '<option value="$category["name"]" ';
+									if(isset($_GET['id'])) {
+										if($category_name === $category['name']) {
+											echo "selected >";
+										}else {
+											echo ">";
+										}
 									}else {
 										echo ">";
 									}
+									
 									echo $category['name'];
-
-
 									echo "</option>";
 								}
 							?>
@@ -141,7 +160,11 @@
 					<div class="form-group">
 						<input type="file" name="image" class="form-control">
 					</div>
+					<?php if(isset($_GET['id'])) { ?>
+						<input value="Update Post" type="submit" name="updatepost" class="btn btn-primary" style="float: right;">
+					<?php }else { ?>
 					<input value="Add Post" type="submit" name="addpost" class="btn btn-primary" style="float: right;">
+					<?php } ?>
 				</form>
 			</div>
 		</div>
