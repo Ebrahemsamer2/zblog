@@ -4,7 +4,7 @@
 	include "inc/functions.php";
 ?>
 
-<?php 
+<?php 	$id = "";
 		$title = "";
 		$content = "";
 		$excerpt = "";
@@ -52,9 +52,7 @@
 					}else if( $img_size > 1000000) {
 						$error_msg = "Image size must be less than 1M";
 					}
-
 				}
-
 			}
 
 			if(empty($error_msg)) {
@@ -70,18 +68,68 @@
 				}else {
 					echo "unable to insert";
 				}
-			}else {
-				echo $error_msg;
 			}
 		}else {
 
 			if(isset($_POST['updatepost'])){
 
+			$id = filter_input(INPUT_POST,'id' , FILTER_SANITIZE_NUMBER_INT);
 
-				
-				
+			$title = filter_input(INPUT_POST,'title' , FILTER_SANITIZE_STRING);
+			$content = filter_input(INPUT_POST,'content' , FILTER_SANITIZE_STRING);
+			$category = filter_input(INPUT_POST,'category' , FILTER_SANITIZE_STRING);
+			$excerpt = filter_input(INPUT_POST,'excerpt' , FILTER_SANITIZE_STRING);
+			$tags = filter_input(INPUT_POST,'tags' , FILTER_SANITIZE_STRING);
+			$image = $_FILES['image'];
+
+			$img_name = $image['name'];
+			$img_tmp_name = $image['tmp_name'];
+			$img_size = $image['size'];
+
+
+			$error_msg = "";
+			if(strlen($title) < 50 || strlen($title) > 200) {
+				$error_msg = "Title must be between 100 and 200";
+			}else if(strlen($content) < 500 || strlen($content) > 10000) {
+				$error_msg = "Content must be between 500 and 10000";
+			}else if(! empty($excerpt)){
+				if(strlen($excerpt) < 100 || strlen($excerpt) > 500) {
+					$error_msg = "Excerpt must be between 100 and 500";
+				}
+			}else {
+
+				if(! empty($img_name)) { 
+					$img_extension = strtolower(explode('.', $img_name)[1]); // gfdgdfg.jpg
+
+					$allowed_extensions = array('jpg' , 'png' , 'jpeg');
+
+					if(! in_array($img_extension, $allowed_extensions)) {
+						$error_msg = "Allowed Extensions are jpg, png and jpeg ";
+					}else if( $img_size > 1000000) {
+						$error_msg = "Image size must be less than 1M";
+					}
+				}
 			}
 
+			if(empty($error_msg)) {
+				$updated = "";
+
+				if(empty($image)) {
+					$updated = update_post($title, $content, $excerpt,$category, $tags, $id);
+				}else {
+					$updated = update_post($title, $content, $excerpt,$img_name, $category, $tags, $id);
+				}
+				if($updated) {
+					if(! empty($img_name)) {
+						$new_path = "uploads/posts/".$img_name;
+						move_uploaded_file( $img_tmp_name, $new_path);
+					}
+					echo "Success";
+				}else {
+					echo "Unable to Update";
+				}
+			}
+			}
 		}
 
 
@@ -93,7 +141,7 @@
 
 		$title = $post['title'];
 		$content = $post['content'];
-		$category_name = $post['category'];
+		$post_category_name = $post['category'];
 		$excerpt = $post['excerpt'];
 		$tags = $post['tags'];
 	}
@@ -116,6 +164,7 @@
 			} ?>
 				<form action="post.php" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
+						<input type="hidden" name="id" value="<?php echo $id; ?>">
 						<input value="<?php echo $title; ?>" class="form-control" type="text" name="title" placeholder="Title" required autocomplete="off" >
 						<p class="error title-error">Title must be between 100 and 200 characters</p>
 					</div>
@@ -127,9 +176,9 @@
 						<select class="form-control" name="category">
 							<?php 
 								foreach (get_categories() as $category) {
-									echo '<option value="$category["name"]" ';
+									echo "<option value='{$category['name']}' ";
 									if(isset($_GET['id'])) {
-										if($category_name === $category['name']) {
+										if($post_category_name === $category['name']) {
 											echo "selected >";
 										}else {
 											echo ">";
@@ -137,7 +186,6 @@
 									}else {
 										echo ">";
 									}
-									
 									echo $category['name'];
 									echo "</option>";
 								}
