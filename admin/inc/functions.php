@@ -38,9 +38,9 @@ function get_posts($id = "") {
 	include "connect.php";
 	$sql = "";
 	if(empty($id)){
-		$sql = "SELECT * FROM posts";
+		$sql = "SELECT * FROM posts ORDER BY datetime DESC";
 	}else {
-		$sql = "SELECT * FROM posts WHERE id = ?";
+		$sql = "SELECT * FROM posts WHERE id = ? ";
 	}
 
 	try {

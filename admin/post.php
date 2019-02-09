@@ -64,7 +64,7 @@
 						$new_path = "uploads/posts/".$img_name;
 						move_uploaded_file( $img_tmp_name, $new_path);
 					}
-					echo "Success";
+					redirect("posts.php");
 				}else {
 					echo "unable to insert";
 				}
@@ -124,7 +124,7 @@
 						$new_path = "uploads/posts/".$img_name;
 						move_uploaded_file( $img_tmp_name, $new_path);
 					}
-					echo "Success";
+					redirect("posts.php");
 				}else {
 					echo "Unable to Update";
 				}
