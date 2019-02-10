@@ -6,6 +6,7 @@
 
 
 <?php 
+	$name = "";
 		
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -40,8 +41,47 @@
 				redirect("categories.php");	
 			}	
 
+		} else {
+
+			if(isset($_POST['updatecategory'])) {
+
+				$id = filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT);
+				$name = filter_input(INPUT_POST,'name',FILTER_SANITIZE_STRING);
+
+				$error_msg = "";
+				if( strlen($name) < 5 || strlen($name) > 50) {
+					$error_msg = "Category Name must be between 5 and 50 character";
+				}
+
+				if(empty($error_msg)) {
+					if (! session_id()){
+						session_start();
+					}
+					if(update_category($name, $id)) {
+						$_SESSION['success'] = "Category has been Updated Successfully";
+						redirect("categories.php");					
+					}else {
+						$_SESSION['error'] = "Unable to Update Category";
+						redirect("categories.php");	
+					}
+				}else {
+					if (! session_id()){
+						session_start();
+					}
+					$_SESSION['error'] = $error_msg;
+					redirect("categories.php");	
+				}	
+			}
 		}
 
+	} else {
+		if(isset($_GET['id']) && ! empty($_GET['id'])) {
+
+			$id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
+
+			$category = get_categories($id);
+			$name = $category['name'];
+		}
 	}
 
 ?>
@@ -78,11 +118,16 @@
 					<div class="row">
 						<div class="col-sm-10">
 							<div class="form-group">
-								<input type="text" name="name" class="form-control" placeholder="Category Name" autocomplete="off" required>
+								<input type="hidden" name="id" value="<?php echo $id; ?>">
+								<input value="<?php echo $name; ?>" type="text" name="name" class="form-control" placeholder="Category Name" autocomplete="off" required>
 							</div>
 						</div>
 						<div class="col-sm">
-							<input value="Add Category" type="submit" name="addcategory" class="btn btn-primary">
+							<?php if(isset($_GET['id'])) {
+								echo '<input value="Update Category" type="submit" name="updatecategory" class="btn btn-primary">';
+							}else { ?>
+								<input value="Add Category" type="submit" name="addcategory" class="btn btn-primary">
+							<?php } ?>
 						</div>
 					</div>
 				</form>
@@ -118,7 +163,7 @@
 					      	?>
 					      </td>
 					      <td class="action-links">
-					      	<a class="btn btn-primary btn-sm" href="post.php?id=<?php echo $post['id']; ?>">Edit</a>
+					      	<a class="btn btn-primary btn-sm" href="categories.php?id=<?php echo $category['id']; ?>">Edit</a>
 					      	<form onsubmit="return confirm('Are You Sure?');" action="deletecategory.php" method="POST">
 					      		<input type="hidden" name="id" value="<?php echo $category['id']; ?>">
 					      		<input class="btn btn-danger btn-sm" type="submit" value="Delete" name="deletecategory">
