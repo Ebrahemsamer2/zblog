@@ -15,7 +15,22 @@ function get_categories() {
 	}
 }
 
+function insert_category($datetime,$name,$creater_name) {
+	$fields = array($datetime, $name, $creater_name);
+	include "connect.php";
+	$sql = "INSERT INTO categories (datetime, name, creater_name) VALUES (?,?,?)";
 
+	try{
+		$result = $con->prepare($sql);
+		for($i = 1; $i <= 3; $i++){
+			$result->bindValue($i, $fields[$i - 1], PDO::PARAM_STR);
+		}
+		return $result->execute();
+	}catch(Exception $e) {
+		echo "Error: ". $e->getMessage();
+		return false;
+	}
+}
 /* Post Functions  */
 
 function insert_post($datetime, $title, $content, $author, $excerpt, $image, $category, $tags) {

@@ -11,7 +11,8 @@ body {
 .col-sm-2 {
 	padding-left: 0;
 }
-.posts .alert {
+.posts .alert,
+.categories .alert{
 	margin-top: 10px;
 	display: inline-block;
 }
@@ -86,7 +87,7 @@ body {
 
 
 .posts div table tbody td.action-links,
-.categories div table tbody td.action-links, {
+.categories div table tbody td.action-links {
 	width: 130px;
 }
 

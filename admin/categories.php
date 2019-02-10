@@ -4,6 +4,49 @@
 
 <?php include "inc/connect.php"; ?>
 
+
+<?php 
+		
+	if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+		if(isset($_POST['addcategory'])){
+
+			$name = filter_input(INPUT_POST,'name',FILTER_SANITIZE_STRING);
+			date_default_timezone_set("Africa/Cairo");
+			$datetime = date('M-d-Y h:m', time());
+			$creater_name = "Ebrahem"; // temporary name until creating admins
+
+			$error_msg = "";
+			if( strlen($name) < 5 || strlen($name) > 50) {
+				$error_msg = "Category Name must be between 5 and 50 character";
+			}
+
+			if(empty($error_msg)) {
+				if (! session_id()){
+					session_start();
+				}
+				if(insert_category($datetime,$name,$creater_name)) {
+					$_SESSION['success'] = "Category has been Added Successfully";
+					redirect("categories.php");					
+				}else {
+					$_SESSION['error'] = "Unable to Insert Category";
+					redirect("categories.php");	
+				}
+			}else {
+				if (! session_id()){
+					session_start();
+				}
+				$_SESSION['error'] = $error_msg;
+				redirect("categories.php");	
+			}	
+
+		}
+
+	}
+
+?>
+
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-2">
@@ -12,7 +55,6 @@
 		<div class="col-sm">
 			
 			<div class="categories">
-
 				<?php 
 					if( ! session_id() ) {
 						session_start();
@@ -43,8 +85,6 @@
 							<input value="Add Category" type="submit" name="addcategory" class="btn btn-primary">
 						</div>
 					</div>
-
-
 				</form>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-dark">
