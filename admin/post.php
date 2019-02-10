@@ -59,14 +59,18 @@
 
 				// Insert Data in Database
 				if( insert_post($datetime, $title, $content, $author, $excerpt, $img_name, $category, $tags) ) {
-
+					if (! session_id()){
+						session_start();
+					}
 					if(! empty($img_name)) {
 						$new_path = "uploads/posts/".$img_name;
 						move_uploaded_file( $img_tmp_name, $new_path);
 					}
+					$_SESSION['success'] = "Post has been Added Successfully";
 					redirect("posts.php");
 				}else {
-					echo "unable to insert";
+					$_SESSION['error'] = "Unable to Add Post";
+					redirect("posts.php");
 				}
 			}
 		}else {
@@ -120,13 +124,19 @@
 					$updated = update_post($title, $content, $excerpt,$img_name, $category, $tags, $id);
 				}
 				if($updated) {
+
+					if(! session_id()){
+						session_start();
+					}
 					if(! empty($img_name)) {
 						$new_path = "uploads/posts/".$img_name;
 						move_uploaded_file( $img_tmp_name, $new_path);
 					}
+					$_SESSION['success'] = "Post has been Updated Successfully";
 					redirect("posts.php");
 				}else {
-					echo "Unable to Update";
+					$_SESSION['error'] = "Unable to Update Post";
+					redirect("posts.php");
 				}
 			}
 			}

@@ -12,7 +12,25 @@
 		<div class="col-sm">
 			
 			<div class="posts">
-				
+
+				<?php 
+					if( ! session_id() ) {
+						session_start();
+					}
+					if( isset($_SESSION['success']) && ! empty($_SESSION['success'])) {
+						echo "<div class='alert alert-success'>";
+						echo $_SESSION['success'];
+						echo "</div>";
+						$_SESSION['success'] = "";
+					}
+					if( isset($_SESSION['error']) && ! empty($_SESSION['error'])) {
+						echo "<div class='alert alert-danger'>";
+						echo $_SESSION['error'];
+						echo "</div>";
+						$_SESSION['error'] = "";
+					}
+				?>
+
 				<h4>Posts</h4>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-dark">
