@@ -71,15 +71,14 @@
 			}
 		}else {
 
-			if(isset($_POST['updatepost'])){
+			if(isset($_POST['updateadmin'])){
 
 			$id = filter_input(INPUT_POST,'id' , FILTER_SANITIZE_NUMBER_INT);
 
-			$title = filter_input(INPUT_POST,'title' , FILTER_SANITIZE_STRING);
-			$content = filter_input(INPUT_POST,'content' , FILTER_SANITIZE_STRING);
-			$category = filter_input(INPUT_POST,'category' , FILTER_SANITIZE_STRING);
-			$excerpt = filter_input(INPUT_POST,'excerpt' , FILTER_SANITIZE_STRING);
-			$tags = filter_input(INPUT_POST,'tags' , FILTER_SANITIZE_STRING);
+			$username = filter_input(INPUT_POST,'username' , FILTER_SANITIZE_STRING);
+			$email = filter_input(INPUT_POST,'email' , FILTER_SANITIZE_STRING);
+			$roletype = filter_input(INPUT_POST,'roletype' , FILTER_SANITIZE_STRING);
+
 			$image = $_FILES['image'];
 
 			$img_name = $image['name'];
@@ -88,14 +87,10 @@
 
 
 			$error_msg = "";
-			if(strlen($title) < 50 || strlen($title) > 200) {
-				$error_msg = "Title must be between 100 and 200";
-			}else if(strlen($content) < 500 || strlen($content) > 10000) {
-				$error_msg = "Content must be between 500 and 10000";
-			}else if(! empty($excerpt)){
-				if(strlen($excerpt) < 100 || strlen($excerpt) > 500) {
-					$error_msg = "Excerpt must be between 100 and 500";
-				}
+			if(strlen($username) < 5 || strlen($username) > 30) {
+				$error_msg = "Username must be between 5 and 30 Characters";
+			}else if(strlen($email) < 10 || strlen($email) > 100) {
+				$error_msg = "Email must be between 10 and 100 Characters";
 			}else {
 
 				if(! empty($img_name)) { 
@@ -112,44 +107,38 @@
 			}
 
 			if(empty($error_msg)) {
-				$updated = "";
-
-				if(empty($image)) {
-					$updated = update_post($title, $content, $excerpt,$category, $tags, $id);
-				}else {
-					$updated = update_post($title, $content, $excerpt,$img_name, $category, $tags, $id);
+				if (! session_id()){
+					session_start();
 				}
-				if($updated) {
-
-					if(! session_id()){
-						session_start();
-					}
+				// Insert Data in Database
+				if( update_admin($username,$roletype,$img_name, $id) ) {
 					if(! empty($img_name)) {
-						$new_path = "uploads/posts/".$img_name;
+						$new_path = "uploads/admins/".$img_name;
 						move_uploaded_file( $img_tmp_name, $new_path);
 					}
-					$_SESSION['success'] = "Post has been Updated Successfully";
-					redirect("posts.php");
+					$_SESSION['success'] = "Admin has been Updated Successfully";
+					redirect("admins.php");
 				}else {
-					$_SESSION['error'] = "Unable to Update Post";
-					redirect("posts.php");
+					$_SESSION['error'] = "Unable to Update Admin";
+					redirect("admins.php");
 				}
 			}
-			}
 		}
+	}
 
 
 	}else if(isset($_GET['id'])){
 
 		$id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
 
-		$post = get_posts($id);
+		$admin = get_admins($id);
 
-		$title = $post['title'];
-		$content = $post['content'];
-		$post_category_name = $post['category'];
-		$excerpt = $post['excerpt'];
-		$tags = $post['tags'];
+		$username = $admin['username'];
+		$email = $admin['email'];
+		$roletype = $admin['role_type'];
+		$image = $admin['image'];
+
+		$roletypes = array("Admin", "Subscriber");
 	}
 
 
@@ -180,11 +169,32 @@
 					</div>
 					<div class="form-group">
 						<select class="form-control" name="roletype">
-							<option value="Admin">Admin</option>
-							<option value="Subscriber">Subscriber</option>
+
+							<?php if(isset($_GET['id'])) { ?>
+
+							<?php foreach ($roletypes as $role) { ?>
+								<option value="<?php echo $role ?>" <?php if($role === $roletype) {echo "selected >";}else {
+									echo ">";
+								} ?>
+
+									<?php echo $role ?></option>
+							<?php } 
+								}else { ?>
+									<option value="Admin" >Admin</option>
+									<option value="Subscriber" >Subscriber</option>
+								<?php }
+							?>
 						</select>
 					</div>
+					<?php 
+						if(isset($_GET['id'])) {
 
+							if(! empty($image)){ ?>
+								<label style="margin-left: 15px;">Admin Photo: <img width="100" src="uploads/admins/<?php echo $image; ?>" ></label>
+						<?php	}
+
+						}
+					?>
 					<?php if(! empty($post['image'])){ ?>
 						<label>Post Image: </label>
 						<img width="100" src="uploads/posts/<?php echo $post['image'];?>">
