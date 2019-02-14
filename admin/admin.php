@@ -4,7 +4,8 @@
 	include "inc/functions.php";
 ?>
 
-<?php 	$id = "";
+<?php 	
+		$id = "";
 		$username = "";
 		$email = "";
 		$excerpt = "";
