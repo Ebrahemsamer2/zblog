@@ -102,7 +102,9 @@ body {
 
 .posts h4,
 .post h4,
-.categories h4 {
+.categories h4,
+.admin h4,
+.admins h4{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }

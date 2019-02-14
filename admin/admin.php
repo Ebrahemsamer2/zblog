@@ -11,18 +11,18 @@
 		$tags = "";
 
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
-		if(isset($_POST['addpost'])) {
+		if(isset($_POST['addadmin'])) {
 
-			$title = filter_input(INPUT_POST,'title' , FILTER_SANITIZE_STRING);
-			$content = filter_input(INPUT_POST,'content' , FILTER_SANITIZE_STRING);
-			$category = filter_input(INPUT_POST,'category' , FILTER_SANITIZE_STRING);
-			$excerpt = filter_input(INPUT_POST,'excerpt' , FILTER_SANITIZE_STRING);
-			$tags = filter_input(INPUT_POST,'tags' , FILTER_SANITIZE_STRING);
+			$username = filter_input(INPUT_POST,'username' , FILTER_SANITIZE_STRING);
+			$email = filter_input(INPUT_POST,'email' , FILTER_SANITIZE_STRING);
+			$roletype = filter_input(INPUT_POST,'roletype' , FILTER_SANITIZE_STRING);
 
-			$author = "Ebrahem"; // Temporary Author until creating admins
+			$created_by = "Ebrahem"; // Temporary Author until creating admins
 
 			date_default_timezone_set("Africa/Cairo");
 			$datetime = date('M-d-Y h:m', time());
+
+			$password = password_hash('11111111',PASSWORD_DEFAULT);
 
 			$image = $_FILES['image'];
 
@@ -32,14 +32,10 @@
 
 
 			$error_msg = "";
-			if(strlen($title) < 50 || strlen($title) > 200) {
-				$error_msg = "Title must be between 100 and 200";
-			}else if(strlen($content) < 500 || strlen($content) > 10000) {
-				$error_msg = "Content must be between 500 and 10000";
-			}else if(! empty($excerpt)){
-				if(strlen($excerpt) < 100 || strlen($excerpt) > 500) {
-					$error_msg = "Excerpt must be between 100 and 500";
-				}
+			if(strlen($username) < 5 || strlen($username) > 30) {
+				$error_msg = "Username must be between 5 and 30 Characters";
+			}else if(strlen($email) < 10 || strlen($email) > 100) {
+				$error_msg = "Email must be between 10 and 100 Characters";
 			}else {
 
 				if(! empty($img_name)) { 
@@ -60,16 +56,16 @@
 					session_start();
 				}
 				// Insert Data in Database
-				if( insert_post($datetime, $title, $content, $author, $excerpt, $img_name, $category, $tags) ) {
+				if( insert_admin($datetime, $username, $email,$password,$roletype, $created_by, $img_name) ) {
 					if(! empty($img_name)) {
-						$new_path = "uploads/posts/".$img_name;
+						$new_path = "uploads/admins/".$img_name;
 						move_uploaded_file( $img_tmp_name, $new_path);
 					}
-					$_SESSION['success'] = "Post has been Added Successfully";
-					redirect("posts.php");
+					$_SESSION['success'] = "Admin has been Added Successfully";
+					redirect("admins.php");
 				}else {
-					$_SESSION['error'] = "Unable to Add Post";
-					redirect("posts.php");
+					$_SESSION['error'] = "Unable to Add Admin";
+					redirect("admins.php");
 				}
 			}
 		}else {
@@ -165,13 +161,13 @@
 			<?php include "inc/sidebar.php"; ?>
 		</div>
 		<div class="col-sm">
-			<div class="post">
+			<div class="admin">
 				<?php if(isset($_GET['id'])) { ?>
 				<h4>Edit Admin</h4>
 			<?php }else {
 				echo "<h4>Add New Admin</h4>";
 			} ?>
-				<form action="post.php" method="POST" enctype="multipart/form-data">
+				<form action="admin.php" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
 						<input value="<?php echo $username; ?>" class="form-control" type="text" name="username" placeholder="Username" required autocomplete="off" >
