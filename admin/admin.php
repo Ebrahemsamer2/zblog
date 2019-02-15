@@ -58,6 +58,16 @@
 				}
 				// Insert Data in Database
 				if( insert_admin($datetime, $username, $email,$password,$roletype, $created_by, $img_name) ) {
+					
+					// send password to admin
+					if (password_verify('11111111', $password)) {
+						$send_password = "11111111";
+						$subject = "Recieve Your Password";
+
+						$message = "You have been added in ZBlog Website as Admin, Congrats Your password is $send_password , You can change it in your admin panel";
+
+						mail($email, $subject, $message);
+					}
 					if(! empty($img_name)) {
 						$new_path = "uploads/admins/".$img_name;
 						move_uploaded_file( $img_tmp_name, $new_path);
