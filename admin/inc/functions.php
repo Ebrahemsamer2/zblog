@@ -227,6 +227,26 @@ function update_admin($username,$roletype,$img_name, $id) {
 
 }
 
+
+function is_admin($email) {
+
+	include "connect.php";
+	$sql = "SELECT id, email, username, password FROM admins WHERE email = ? ";
+	try {
+
+		$result = $con->prepare($sql);
+		$result->bindValue(1, $email, PDO::PARAM_STR);
+		$result->execute();
+		return $result->fetch(PDO::FETCH_ASSOC);
+	}
+	catch(Exception $e) {
+		echo "Error: ". $e->getMessage();
+		return false;
+	}
+
+}
+
+
 function redirect($location) {
 	header("Location: $location");
 	exit;

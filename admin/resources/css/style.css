@@ -14,12 +14,20 @@ body.login-style {
 .col-sm-2 {
 	padding-left: 0;
 }
+
+/*  Errors Style */
 .posts .alert,
 .categories .alert,
 .admins .alert {
 	margin-top: 10px;
 	display: inline-block;
 }
+
+.alert-default {
+	color: #d50707;
+} 
+
+
 h6 {
 	margin: 0;
 }
@@ -177,6 +185,12 @@ h6 {
 	border-bottom: 1px solid grey;
 	border-radius: 0;
 	padding-left: 30px;
+	color: #fff;
+}
+.login .login-form form input[name='email']:focus,
+.login .login-form form input[name='password']:focus {
+
+	box-shadow: none;
 
 }
 .login .login-form form div {
@@ -185,7 +199,7 @@ h6 {
 .login .login-form form i {
 	position: absolute;
 	top: 12px;
-	left: 5px;
+	left: 3px;
 	color: #6C7573;
 }
 
@@ -194,4 +208,7 @@ h6 {
 	background: #FC445F;
 	border-radius: 2px;
 	box-shadow: 0 1px 2px #FC445F;;
+}
+.login .login-form a.forgot-password {
+	text-decoration: none;
 }
