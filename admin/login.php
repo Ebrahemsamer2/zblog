@@ -22,6 +22,9 @@
 					if(! session_id()) {
 						session_start();
 					}
+
+					$_SESSION['admin_username'] = $admin_found['username'];
+					$_SESSION['admin_email'] = $admin_found['email'];
 					redirect('index.php');
 				}else {
 					if(! session_id()) {

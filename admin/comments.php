@@ -1,3 +1,4 @@
+<?php $page_title = "Comments"; ?>
 <?php include "inc/header.php"; ?>
 
 <?php include "inc/navbar.php"; ?>
