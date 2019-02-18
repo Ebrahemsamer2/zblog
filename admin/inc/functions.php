@@ -247,6 +247,27 @@ function is_admin($email) {
 }
 
 
+/* Comment Functions  */
+
+
+function insert_comment($datetime, $username, $email, $comment_comment, $post_id) {
+	$fields = array($datetime, $username, $email, $comment_comment);
+	include "connect.php";
+	$sql = "INSERT INTO comments (datetime, commenter_name, commenter_email, comment, post_id) VALUES (?,?,?,?,?) ";
+
+	try{
+		$result = $con->prepare($sql);
+		for($i = 1; $i <= 4; $i++){
+			$result->bindValue($i, $fields[$i - 1], PDO::PARAM_STR);
+		}
+		$result->bindValue(5, $post_id, PDO::PARAM_INT);
+		return $result->execute();
+	}catch(Exception $e) {
+		echo "Error: ". $e->getMessage();
+		return false;
+	}
+}
+
 function redirect($location) {
 	header("Location: $location");
 	exit;
