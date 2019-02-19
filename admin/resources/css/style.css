@@ -18,11 +18,11 @@ body.login-style {
 /*  Errors Style */
 .posts .alert,
 .categories .alert,
-.admins .alert {
+.admins .alert,
+.comments .alert {
 	margin-top: 10px;
 	display: inline-block;
 }
-
 .alert-default {
 	color: #d50707;
 } 
@@ -220,4 +220,8 @@ h6 {
 
 .comments div table tbody td.action-links {
 	width: 220px;
+}
+
+.comments div table tbody td {
+	min-width: 130px;
 }

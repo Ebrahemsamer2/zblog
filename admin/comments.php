@@ -39,7 +39,7 @@
 					    <tr>
 					      <th scope="col">#</th>
 					      <th scope="col">Created_at</th>
-					      <th scope="col">Name</th>
+					      <th scope="col">Username</th>
 					      <th scope="col">Comment</th>
 					      <th scope="col">Post Title</th>
 					      <th scope="col">Actions</th>
