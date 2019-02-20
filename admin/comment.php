@@ -101,7 +101,7 @@
 			<?php include "inc/sidebar.php"; ?>
 		</div>
 		<div class="col-sm">
-			<div class="post">
+			<div class="comment">
 				<?php if(isset($_GET['id'])) { ?>
 				<h4>Edit Comment</h4>
 			<?php }else {

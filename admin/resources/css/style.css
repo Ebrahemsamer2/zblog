@@ -19,7 +19,7 @@ body.login-style {
 .posts .alert,
 .categories .alert,
 .admins .alert,
-.comments .alert {
+.approved-comments .alert {
 	margin-top: 10px;
 	display: inline-block;
 }
@@ -101,14 +101,16 @@ h6 {
 
 .posts div table tbody td.action-links,
 .categories div table tbody td.action-links,
-.admins div table tbody td.action-links {
+.admins div table tbody td.action-links,
+.approved-comments div table tbody td.action-links {
 	width: 130px;
 }
 
 .posts div table tbody td form,
 .categories div table tbody td form,
 .admins div table tbody td form ,
-.comments div table tbody td form {
+.approved-comments div table tbody td form,
+.unapproved-comments div table tbody td form {
 	display: inline;
 }
 
@@ -121,7 +123,8 @@ h6 {
 .categories h4,
 .admin h4,
 .admins h4,
-.comments h4 {
+.approved-comments h4,
+.unapproved-comments h4 {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
@@ -218,7 +221,7 @@ h6 {
 
 /* Comments Style */
 
-.comments div table tbody td.action-links {
+.unapproved-comments div table tbody td.action-links {
 	width: 220px;
 }
 

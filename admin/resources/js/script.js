@@ -58,4 +58,22 @@ $(function() {
 		return true;
 	});
 
+
+
+	//  Comments Validation
+	$(".comment form").submit(function() {
+		var comment;
+
+		comment = $(".comment form textarea").val();
+
+		if(comment.length < 20 || comment.length > 1000) {
+			$(".comment form p.comment-error").fadeIn(500);
+			return false;
+		}else {
+			$(".comment form p.comment-error").fadeOut(500);
+		}
+		return true;
+	});
+
+	
 });
