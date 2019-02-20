@@ -1,4 +1,4 @@
-<?php $page_title = "Posts";
+<?php $page_title = "New Post | ZBlog";
 	include "inc/header.php";
 	include "inc/navbar.php";
 	include "inc/functions.php";

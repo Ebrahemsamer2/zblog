@@ -94,31 +94,12 @@
 
 					  </tbody>
 					</table>
-					<a class="btn btn-info" style="float: right;" href="admin.php">Add New Comment</a>
+					<a class="btn btn-info" style="float: right;" href="comment.php">Add New Comment</a>
 				</div>
 			</div>
 
 
 			<div class="unapproved-comments">
-
-				<?php 
-					if( ! session_id() ) {
-						session_start();
-					}
-					if( isset($_SESSION['success']) && ! empty($_SESSION['success'])) {
-						echo "<div class='alert alert-success'>";
-						echo $_SESSION['success'];
-						echo "</div>";
-						$_SESSION['success'] = "";
-					}
-					if( isset($_SESSION['error']) && ! empty($_SESSION['error'])) {
-						echo "<div class='alert alert-danger'>";
-						echo $_SESSION['error'];
-						echo "</div>";
-						$_SESSION['error'] = "";
-					}
-				?>
-
 				<h4>Unapproved Comments</h4>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-dark">
