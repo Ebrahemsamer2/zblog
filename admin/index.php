@@ -1,6 +1,7 @@
 
 <?php $page_title = "Dashboard"; ?>
 <?php include "inc/header.php"; ?>
+<?php include "inc/functions.php"; ?>
 <?php include "inc/navbar.php"; ?>
 
 <div class="container-fluid">
@@ -9,7 +10,7 @@
 			<?php include "inc/sidebar.php"; ?>
 		</div>
 		<div class="col-sm">
-			This is the index Page
+			
 		</div>
 	</div>
 </div>

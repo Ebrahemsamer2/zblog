@@ -3,6 +3,10 @@
     $logo_name = $setting['logo'];
     $tagline = $setting['tagline'];
   }
+
+  if(! session_id()) {
+    session_start();
+  }
 ?>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark">
 	<div class="container-fluid">
@@ -23,13 +27,16 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          <?php
+          if(isset($_SESSION['admin_username'])) {
+            echo $_SESSION['admin_username'];
+          }
+          ?>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="profile.php">Profile</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="logout.php">Logout</a>
         </div>
       </li>
     </ul>

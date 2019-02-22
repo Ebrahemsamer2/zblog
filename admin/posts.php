@@ -1,7 +1,8 @@
 <?php $page_title = "Posts"; ?>
 <?php include "inc/header.php"; ?>
-<?php include "inc/navbar.php"; ?>
 <?php include "inc/functions.php"; ?>
+
+<?php include "inc/navbar.php"; ?>
 
 <?php include "inc/connect.php"; ?>
 
