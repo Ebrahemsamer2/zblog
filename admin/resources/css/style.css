@@ -31,6 +31,12 @@ body.login-style {
 h6 {
 	margin: 0;
 }
+
+.sidebar .badge-info {
+	margin-top: 2px;
+}
+
+
 /* Navbar Style */
 .navbar {
 	padding: 0;
@@ -228,4 +234,19 @@ h6 {
 
 .comments div table tbody td {
 	min-width: 130px;
+}
+
+/* Settings Style */
+
+.settings h4 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.settings form {
+	margin-left: 40px;
+}
+.settings form input[type='submit'] {
+	margin-top: 10px;
+	margin-bottom: 5px;
+	border-radius: 2px;
 }
