@@ -1,9 +1,16 @@
+<?php 
+  foreach (get_settings() as $setting) {
+    $logo_name = $setting['logo'];
+    $tagline = $setting['tagline'];
+  }
+?>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark">
-	<div class="container">
+	<div class="container-fluid">
   
     <a class="navbar-brand nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Nabvar
+      <img class="logo" width="40" height="40" src="uploads/<?php echo $logo_name; ?>">
     </a>
+    <span class="tagline"><?php echo $tagline; ?></span>
     <div class="dropdown-menu brand-drop-down" aria-labelledby="navbarDropdown">
       <a class="dropdown-item" href="#">View Site</a>
     </div>

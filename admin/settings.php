@@ -73,9 +73,13 @@
 				$relatedpn = filter_input(INPUT_POST,'relatedpn',FILTER_SANITIZE_NUMBER_INT);
 
 				if(update_posts_settings($hpn, $posts_order, $rpn, $relatedpn)) {
-					
+					if(! session_id()) {
+						session_start();
+					}
+					$_SESSION['success'] = "Post Settings has Changed";
+				}else {
+					$_SESSION['error'] = "Post Settings has not Changed";
 				}
-
 			}
 
 		}		
@@ -106,7 +110,22 @@
 			<div class="settings">
 				
 				<div class="general-settings">
-					
+					<?php 
+					if(! session_id()) {
+						session_start();
+					}
+					if(isset($_SESSION['success']) && ! empty($_SESSION['success'])) {
+						echo "<div class='alert alert-success'>";
+						echo $_SESSION['success'];
+						echo "</div>";
+						$_SESSION['success'] = "";
+					}else if(isset($_SESSION['success']) && ! empty($_SESSION['success'])) {
+						echo "<div class='alert alert-danger'>";
+						echo $_SESSION['error'];
+						echo "</div>";
+						$_SESSION['error'] = "";
+					}
+					?>
 					<h4>General Settings</h4>
 					<form action="settings.php" method="POST" enctype="multipart/form-data">
 						<div class="row">
