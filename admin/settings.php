@@ -3,6 +3,86 @@
 <?php include "inc/functions.php"; ?>
 <?php include "inc/navbar.php"; ?>
 
+
+<?php 
+	if($_SERVER['REQUEST_METHOD'] === "POST") {
+
+		if(isset($_POST['save-general'])) {
+			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+			$tagline = filter_input(INPUT_POST, 'tagline', FILTER_SANITIZE_STRING);
+
+			$logo = $_FILES['logo'];
+
+			$logo_name = $logo['name'];
+			$logo_tmp_name = $logo['tmp_name'];
+			$logo_size = $logo['size'];
+
+			$error_msg = "";
+			if(strlen($name) < 3 || strlen($name) > 20) {
+				$error_msg = "Site Name must be between 3, 20 Character ";
+			}else if(strlen($tagline) < 10 || strlen($tagline) > 100) {
+				$error_msg = "Site Tagline must be between 10, 100 Character";
+			} else {
+
+				if(! empty($logo_name)) { 
+					$img_extension = strtolower(explode('.', $logo_name)[1]); // gfdgdfg.jpg
+
+					$allowed_extensions = array('jpg' , 'png' , 'jpeg');
+
+					if(! in_array($img_extension, $allowed_extensions)) {
+						$error_msg = "Allowed Extensions are jpg, png and jpeg ";
+					}else if( $logo_size > 2000000) {
+						$error_msg = "Logo size must be less than 2M";
+					}
+				}
+			}
+
+			if(empty($error_msg)) {
+				$updated = "";
+				if(empty($logo_name)) {
+					$updated = update_general_settings($name, $tagline);
+				}else {
+					$updated = update_general_settings($name, $tagline, $logo_name);
+				}
+
+				if($updated) {
+
+					if(! empty($logo_name)) {
+						$new_path = "uploads/".$logo_name;
+						move_uploaded_file($logo_tmp_name, $new_path);
+					}
+
+					if(! session_id()) {
+						session_start();
+					}
+					$_SESSION['success'] = "Settings has Changed";
+				}else {
+					$_SESSION['error'] = "Settings has not Changed";
+				}
+			}else {
+				$_SESSION['error'] = $error_msg;
+			}
+
+		}else {
+
+			if(isset($_POST['save-posts'])) {
+
+				$hpn = filter_input(INPUT_POST,'hpn',FILTER_SANITIZE_NUMBER_INT);
+				$posts_order = filter_input(INPUT_POST,'posts_order',FILTER_SANITIZE_STRING);
+				$rpn = filter_input(INPUT_POST,'rpn',FILTER_SANITIZE_NUMBER_INT);
+				$relatedpn = filter_input(INPUT_POST,'relatedpn',FILTER_SANITIZE_NUMBER_INT);
+
+				if(update_posts_settings($hpn, $posts_order, $rpn, $relatedpn)) {
+					
+				}
+
+			}
+
+		}		
+	}
+
+?>
+
 <?php 
 	foreach (get_settings() as $setting) {
 		$name = $setting['name'];
