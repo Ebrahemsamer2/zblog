@@ -368,7 +368,22 @@ function get_post_comments($approve, $id = "") {
 
 }
 
+/* Setting Functions */
 
+
+function get_settings() {
+	include "connect.php";
+	$sql = "SELECT * FROM settings";
+
+	try {
+		$result = $con->query($sql);
+		return $result;
+	}
+	catch(Exception $e) {
+		echo "Error: ".$e->getMessage();
+		return array();
+	}
+}
 
 function redirect($location) {
 	header("Location: $location");
