@@ -1,9 +1,7 @@
-<?php $page_title = "Admins"; ?>
+<?php $page_title = "Comments | ZBlog"; ?>
 <?php include "inc/header.php"; ?>
-<?php include "inc/navbar.php"; ?>
 <?php include "inc/functions.php"; ?>
-
-<?php include "inc/connect.php"; ?>
+<?php include "inc/navbar.php"; ?>
 
 <div class="container-fluid">
 	<div class="row">

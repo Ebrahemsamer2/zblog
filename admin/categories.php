@@ -1,9 +1,7 @@
+<?php $page_title = "Categories"; ?>
 <?php include "inc/header.php"; ?>
-<?php include "inc/navbar.php"; ?>
 <?php include "inc/functions.php"; ?>
-
-<?php include "inc/connect.php"; ?>
-
+<?php include "inc/navbar.php"; ?>
 
 <?php 
 	$name = "";

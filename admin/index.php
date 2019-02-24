@@ -1,5 +1,5 @@
 
-<?php $page_title = "Dashboard"; ?>
+<?php $page_title = "Dashboard | ZBlog"; ?>
 <?php include "inc/header.php"; ?>
 <?php include "inc/functions.php"; ?>
 <?php include "inc/navbar.php"; ?>

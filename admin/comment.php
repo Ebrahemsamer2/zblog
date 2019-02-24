@@ -1,7 +1,7 @@
-<?php $page_title = "Comments ";
+<?php $page_title = "New Comment | ZBlog";
 	include "inc/header.php";
-	include "inc/navbar.php";
 	include "inc/functions.php";
+	include "inc/navbar.php";
 ?>
 
 <?php 	$id = "";

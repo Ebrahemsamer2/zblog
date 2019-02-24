@@ -231,7 +231,7 @@ function update_admin($username,$roletype,$img_name, $id) {
 function is_admin($email) {
 
 	include "connect.php";
-	$sql = "SELECT id, email, username, password FROM admins WHERE email = ? ";
+	$sql = "SELECT * FROM admins WHERE email = ? ";
 	try {
 
 		$result = $con->prepare($sql);
@@ -246,7 +246,21 @@ function is_admin($email) {
 
 }
 
+function update_reset_password_code($email) {
 
+	include "connect.php";
+	$newcode = rand(10000, 99999);
+	$sql = "UPDATE admins SET reset_password_code = $newcode WHERE email = ? ";
+	try {
+		$result = $con->prepare($sql);
+		$result->bindValue(1, $email, PDO::PARAM_STR);
+		return $result->execute();
+	}catch(Exception $e) {
+		echo "Error: " .$e->getMessage();
+		return false;
+	}
+
+}
 /* Comment Functions  */
 
 function get_all_comments($approve) {

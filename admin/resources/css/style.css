@@ -220,12 +220,11 @@ h6 {
 	left: 3px;
 	color: #6C7573;
 }
-
-.login .login-form form input[name='login'] {
+.btn-default {
 	color: #fff;
 	background: #FC445F;
 	border-radius: 2px;
-	box-shadow: 0 1px 2px #FC445F;;
+	box-shadow: 0 0 1px #FC445F;
 }
 .login .login-form a.forgot-password {
 	text-decoration: none;
@@ -259,3 +258,11 @@ h6 {
 .settings form img.logo {
 	border-radius: 50%;
 }
+
+
+/* Reset Password Style  */
+
+div.reset-password-form {
+	width: 400px;
+	margin: 200px auto;
+} 

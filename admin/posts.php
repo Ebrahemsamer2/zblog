@@ -1,10 +1,8 @@
-<?php $page_title = "Posts"; ?>
+<?php $page_title = "Posts | ZBlog"; ?>
 <?php include "inc/header.php"; ?>
 <?php include "inc/functions.php"; ?>
 
 <?php include "inc/navbar.php"; ?>
-
-<?php include "inc/connect.php"; ?>
 
 <div class="container-fluid">
 	<div class="row">
