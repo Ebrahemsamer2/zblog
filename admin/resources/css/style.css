@@ -1,12 +1,15 @@
 
 /* This is style Admin Style File */
 
-/*E84C3D, F7B675*/
+/* #E84C3D, #205e9c*/
 
 /* Global Style */
 
 body {
 	padding-top: 40px;
+}
+* {
+	box-sizing: border-box;
 }
 body.login-style {
 	padding: 0;
@@ -59,7 +62,7 @@ h6 {
 .navbar-brand.dropdown-toggle::after {
 	content: none;
 }
-.dropdown-menu {
+.dropdown-menu{
 	padding: 0;
 	background: #232527;
 }
@@ -266,3 +269,266 @@ div.reset-password-form {
 	width: 400px;
 	margin: 200px auto;
 } 
+
+
+
+/* Dashboard Style */
+
+.dashboard {
+	margin-top: 50px;
+}
+.dashboard .counts {
+	margin-top: 20px;
+}
+
+.dashboard .counts div div {
+	padding: 15px;
+	font-size: 25px;
+	background : #205e9c;
+	color: #d2cbcb;
+	border-radius: 2px;
+	margin-left: 2px;
+}
+.dashboard .counts div div:nth-child(1) {
+	margin-left: 0;
+}
+.dashboard .counts div div span.num {
+	font-weight: lighter;
+}
+
+.dashboard .hottest-posts,
+.dashboard .recent-posts,
+.dashboard .new-links,
+.dashboard .recent-cats {
+	margin-top: 20px;
+	background: #fff;
+	box-shadow: 0 0 1px #9a9a9a;
+	padding: 10px; 
+	margin-left: -12px;
+}
+
+.dashboard .hottest-posts h5,
+.dashboard .recent-posts h5,
+.dashboard .recent-cats h5 {
+	margin-bottom: 15px;
+}
+.dashboard .new-links a {
+	display: block;
+	margin-left: 10px;
+	margin-bottom: 5px;
+	color: #205e9c;
+} 
+.dashboard .new-links a i {
+	color: #a2a2a2;
+	margin-right: 10px;
+}
+.dashboard .hottest-posts a,
+.dashboard .recent-posts a,
+.dashboard .new-links a ,
+.dashboard .recent-cats a{
+	text-decoration: none;
+}
+.dashboard .hottest-posts a h6,
+.dashboard .recent-posts a h6,
+.dashboard .recent-cats a h6{
+	margin-left: 10px;
+    margin-bottom: 15px;
+    color: #205e9c;
+}
+
+/* Profile Style */
+
+.profile {
+	margin-top: 50px;
+}
+.profile span.role-type {
+	display: block;
+	color: #205e9c;
+	font-weight: bold;
+}
+.profile h6.email {
+	color: grey;
+}
+.profile div div {
+	margin-left: -20px;
+}
+
+.profile .update-info h6,
+.profile .update-password h6 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.profile .update-info form,
+.profile .update-password form {
+	margin-left: 30px;
+}
+.profile .update-info form .btn-default,
+.profile .update-password form .btn-default {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.profile .update-password {
+	margin-top: 70px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsicse Style */
+
+
+.container-fluid .row .hide {
+	display: none;
+}
+.container-fluid .row .hide button {
+	width: 150px;
+}
+@media (max-width: 1170px) {
+	.container-fluid .row .col-sm-2 {
+		display: none;
+	}
+	.container-fluid .row .hide {
+		top: 70px;
+		left: 90px;
+		bottom: 20px;
+		display: block;
+		position: absolute;
+		z-index: 100;
+	}
+}
+
+@media (max-width: 768px) {
+	.dashboard {
+		margin-top: 100px;
+	}
+	.dashboard .counts .row div {
+		margin-bottom: 5px;
+		max-width: 40%;
+	}
+	.dashboard .counts .row {
+		margin-left: 70px;
+	}
+	.dashboard h4 {
+		margin-left: 70px;
+	}
+	span.tagline {
+		display: none;
+	}
+	.dashboard .counts .row div:nth-child(1) {
+		margin-left: 2px;
+	}
+}
+
+

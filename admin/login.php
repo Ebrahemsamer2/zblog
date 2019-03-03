@@ -23,6 +23,7 @@
 						session_start();
 					}
 
+					$_SESSION['admin_id'] = $admin_found['id'];
 					$_SESSION['admin_username'] = $admin_found['username'];
 					$_SESSION['admin_email'] = $admin_found['email'];
 

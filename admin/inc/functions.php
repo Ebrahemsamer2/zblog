@@ -1,6 +1,7 @@
 <?php 
 
 /* Categoryu functions */
+
 function get_categories($id = "") {
 	include "connect.php";
 	$sql = "";
@@ -78,6 +79,22 @@ function insert_post($datetime, $title, $content, $author, $excerpt, $image, $ca
 		return false;
 	}
 }
+
+
+function get_recent($table, $limit) {
+	include "connect.php";
+	$sql = "SELECT * FROM $table ORDER BY datetime DESC LIMIT $limit";
+	try {
+		$result = $con->prepare($sql);
+		$result->execute();
+		return $result->fetchAll(PDO::FETCH_ASSOC);
+	}
+	catch(Exception $e) {
+		echo "Error: ".$e->getMessage();
+		return array();
+	}
+}
+
 function get_posts($id = "") {
 	include "connect.php";
 	$sql = "";
@@ -88,12 +105,10 @@ function get_posts($id = "") {
 	}
 
 	try {
-
 		if(! empty($id)) {
 			$result = $con->prepare($sql);
 			$result->bindValue(1, $id, PDO::PARAM_INT);
 			$result->execute();
-
 			return $result->fetch(PDO::FETCH_ASSOC);
 		}else {
 			$result = $con->query($sql);
@@ -442,10 +457,92 @@ function update_posts_settings($hpn, $posts_order, $rpn,$relatedpn) {
 	}	
 }
 
+/* Dashboard Functions */ 
+
+function get_number($table) {
+	include "connect.php";
+	$sql = "SELECT * FROM $table";
+	try {
+		$result = $con->prepare($sql);
+		$result->execute();
+		return $result->rowCount();
+	}
+	catch(Exception $e) {
+		echo "Error: ".$e->getMessage();
+		return array();
+	}
+}
+
+function get_hottest_posts($limit = "") {
+	include "connect.php";
+	$sql = "SELECT p.id,p.title,c.postcount FROM posts AS p
+	INNER JOIN (
+		SELECT post_id, count(*) AS postcount FROM comments GROUP BY post_id
+	) AS c
+	ON p.id = c.post_id 
+	ORDER BY c.postcount DESC LIMIT $limit";
+	try {
+		$result = $con->prepare($sql);
+		$result->execute();
+		return $result->fetchAll(PDO::FETCH_ASSOC);
+	}
+	catch(Exception $e) {
+		echo "Error: ".$e->getMessage();
+		return array();
+	}
+}
+
+
+/*  Profile Functions */ 
+
+function update_admin_profile($username, $email, $image, $id) {
+	$fields = array($username,$email);
+	include "connect.php";
+	$sql = "";
+	if(empty($image)){
+		$sql = "UPDATE admins SET username = ?, email = ? WHERE id = ?";
+	}else {
+		$sql = "UPDATE admins SET username = ?, email = ?, image = ? WHERE id = ?";
+	}
+	try {
+
+		$result = $con->prepare($sql);
+		for($i = 1; $i <= 2; $i++){
+			$result->bindValue($i, $fields[$i - 1], PDO::PARAM_STR);
+		}
+
+		if(! empty($image)) {
+			$result->bindValue(3, $image, PDO::PARAM_STR);
+			$result->bindValue(4,$id,PDO::PARAM_INT);
+		}else {
+			$result->bindValue(3,$id,PDO::PARAM_INT);
+		}
+		return $result->execute();
+	}catch(Exception $e) {
+		echo "Error: " .$e->getMessage();
+		return false;
+	}
+}
+
+function update_password($password, $id) {
+	include "connect.php";
+	$sql = "UPDATE admins SET password = $password WHERE id = $id ";
+	try{
+		$result = $con->prepare($sql);
+		return $result->execute();
+	}catch(Exception $e){
+		echo "Error: ". $e->getMessage();
+		return false;
+	}
+}
+
+
+
 
 
 function redirect($location) {
 	header("Location: $location");
 	exit;
 }
+
 ?>
