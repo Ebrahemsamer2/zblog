@@ -17,6 +17,15 @@ body.login-style {
 .col-sm-2 {
 	padding-left: 0;
 }
+.sidebar .active {
+	background: #205e9c;
+}
+.sidebar .active:hover {
+	background: #205e9c;
+}
+.sidebar i {
+	color: #c71d1d;
+}
 
 /*  Errors Style */
 .posts .alert,
@@ -489,6 +498,11 @@ div.reset-password-form {
 /* Responsicse Style */
 
 
+/* Dashboard */
+
+
+
+/*
 .container-fluid .row .hide {
 	display: none;
 }
@@ -529,6 +543,29 @@ div.reset-password-form {
 	.dashboard .counts .row div:nth-child(1) {
 		margin-left: 2px;
 	}
-}
+}*/
 
 
+
+/* Tabels */
+
+/*@media (max-width: 1200px) {
+
+	td.title,
+	td.content {
+		min-width: 200px;
+	}
+	td.action-links a {
+		width: 55px;
+	}
+	td.action-links form input{
+		margin-top: 5px;
+	}
+	td.post-title {
+		min-width: 250px;
+	}
+	td.comment {
+		min-width: 200px;
+	}
+
+}*/

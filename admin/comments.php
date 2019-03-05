@@ -3,8 +3,13 @@
 <?php include "inc/functions.php"; ?>
 <?php include "inc/navbar.php"; ?>
 
+
+<?php $comments = "active"; ?>
+
+
 <div class="container-fluid">
 	<div class="row">
+		<?php include "inc/media_sidebar.php"; ?>
 		<div class="col-sm-2">
 			<?php include "inc/sidebar.php"; ?>
 		</div>
@@ -57,7 +62,7 @@
 					      	echo $comment['commenter_name'];
 					      	?>
 					      </td>
-					      <td>
+					      <td class="comment">
 					      	<?php
 					      	if(strlen($comment['comment']) > 100){
 					      		echo substr($comment['comment'], 0, 100)." ...";
@@ -67,7 +72,7 @@
 					      	?>		
 					      	</td>
 
-					      <td><?php 
+					      <td class="post-title"><?php 
 					      		$post_id = $comment['post_id'];
 					      		$post_title = get_posts($post_id)['title'];
 					      		
@@ -125,7 +130,7 @@
 					      	echo $comment['commenter_name'];
 					      	?>
 					      </td>
-					      <td>
+					      <td class="comment">
 					      	<?php
 					      	if(strlen($comment['comment']) > 100){
 					      		echo substr($comment['comment'], 0, 100)." ...";
@@ -135,7 +140,7 @@
 					      	?>		
 					      	</td>
 
-					      <td><?php 
+					      <td class="post-title"><?php 
 					      		$post_id = $comment['post_id'];
 					      		$post_title = get_posts($post_id)['title'];
 					      		

@@ -3,6 +3,7 @@
 	include "inc/functions.php";
 	include "inc/navbar.php";
 ?>
+<?php $comments = "active"; ?>
 
 <?php 	$id = "";
 		if(! session_id()) {
@@ -97,6 +98,7 @@
 
 <div class="container-fluid">
 	<div class="row">
+		<?php include "inc/media_sidebar.php"; ?>
 		<div class="col-sm-2">
 			<?php include "inc/sidebar.php"; ?>
 		</div>

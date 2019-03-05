@@ -3,9 +3,10 @@
 <?php include "inc/functions.php"; ?>
 
 <?php include "inc/navbar.php"; ?>
-
+<?php $posts = "active"; ?>
 <div class="container-fluid">
 	<div class="row">
+		<?php include "inc/media_sidebar.php"; ?>
 		<div class="col-sm-2">
 			<?php include "inc/sidebar.php"; ?>
 		</div>
@@ -65,7 +66,7 @@
 					      	?>
 					      	
 					      </td>
-					      <td>
+					      <td class="post-content">
 					      	<?php 
 					      	if(strlen($post['content']) > 100 ){
 					      		echo substr($post['content'], 0,100) . '...';

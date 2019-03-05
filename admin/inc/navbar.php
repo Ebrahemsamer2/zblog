@@ -1,4 +1,13 @@
 <?php 
+  if(! session_id()) {
+    session_start();
+  }
+  if(! isset($_SESSION['admin_email'])) {
+    redirect("login.php");
+  }
+?>
+<?php include "init.php"; ?>
+<?php 
   foreach (get_settings() as $setting) {
     $logo_name = $setting['logo'];
     $tagline = $setting['tagline'];
@@ -16,7 +25,7 @@
     </a>
     <span class="tagline"><?php echo $tagline; ?></span>
     <div class="dropdown-menu brand-drop-down" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="#">View Site</a>
+      <a class="dropdown-item" href="../index.php" target="_blank">View Site</a>
     </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

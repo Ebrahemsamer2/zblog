@@ -2,7 +2,7 @@
 <?php include "inc/header.php"; ?>
 <?php include "inc/functions.php"; ?>
 <?php include "inc/navbar.php"; ?>
-
+<?php $settings = "active"; ?>
 
 <?php 
 	if($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -103,6 +103,7 @@
 
 <div class="container-fluid">
 	<div class="row">
+		<?php include "inc/media_sidebar.php"; ?>
 		<div class="col-sm-2">
 			<?php include "inc/sidebar.php"; ?>
 		</div>

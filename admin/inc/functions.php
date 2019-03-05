@@ -526,9 +526,11 @@ function update_admin_profile($username, $email, $image, $id) {
 
 function update_password($password, $id) {
 	include "connect.php";
-	$sql = "UPDATE admins SET password = $password WHERE id = $id ";
+	$sql = "UPDATE admins SET password = ? WHERE id = ? ";
 	try{
 		$result = $con->prepare($sql);
+		$result->bindValue(1,$password,PDO::PARAM_STR);
+		$result->bindValue(2,$id,PDO::PARAM_STR);
 		return $result->execute();
 	}catch(Exception $e){
 		echo "Error: ". $e->getMessage();

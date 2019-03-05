@@ -4,23 +4,11 @@
 <?php include "inc/functions.php"; ?>
 <?php include "inc/navbar.php"; ?>
 
+<?php $dashboard = "active"; ?>
+
 <div class="container-fluid">
 	<div class="row">
-		<div class="dropdown hide">
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    Pages
-		  </button>
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="dashboard.php">Dashboard</a>
-		    <a class="dropdown-item" href="posts.php">Posts</a>
-		    <a class="dropdown-item" href="categories.php">Categories</a>
-		    <a class="dropdown-item" href="comments.php">Comments</a>
-		    <a class="dropdown-item" href="admins.php">Admins</a>
-		    <a class="dropdown-item" href="users.php">Users</a>
-		    <a class="dropdown-item" href="settings.php">Settings</a>
-		    <a class="dropdown-item" href="logout.php">Logout</a>
-		  </div>
-		</div>
+		<?php include "inc/media_sidebar.php"; ?>
 		<div class="col-sm-2">
 			<?php include "inc/sidebar.php"; ?>
 		</div>
@@ -31,16 +19,16 @@
 					<div class="col-sm-12">
 						<div class="counts text-center">
 							<div class="row">
-								<div class="col-md-3">
+								<div class="col-md-3 col-sm-6">
 									<span class=""><span class="num"><?php echo get_number('posts'); ?></span></br> Posts</span>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-3 col-sm-6">
 									<span><span class="num"><?php echo get_number('categories'); ?></span></br> Categories</span>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-3 col-sm-6">
 									<span><span class="num"><?php echo get_number('comments'); ?></span></br> Comments</span>
 								</div>
-								<div class="col-md">
+								<div class="col-md col-sm">
 									<span><span class="num">2232</span></br> Users</span>
 								</div>
 							</div>
