@@ -33,13 +33,13 @@
 
 
 			$error_msg = "";
-			if(strlen($title) < 50 || strlen($title) > 200) {
-				$error_msg = "Title must be between 100 and 200";
+			if(strlen($title) < 30 || strlen($title) > 200) {
+				$error_msg = "Title must be between 30 and 200";
 			}else if(strlen($content) < 500 || strlen($content) > 10000) {
 				$error_msg = "Content must be between 500 and 10000";
 			}else if(! empty($excerpt)){
-				if(strlen($excerpt) < 100 || strlen($excerpt) > 500) {
-					$error_msg = "Excerpt must be between 100 and 500";
+				if(strlen($excerpt) < 50 || strlen($excerpt) > 500) {
+					$error_msg = "Excerpt must be between 50 and 500";
 				}
 			}else {
 
@@ -92,13 +92,13 @@
 
 
 			$error_msg = "";
-			if(strlen($title) < 50 || strlen($title) > 200) {
-				$error_msg = "Title must be between 100 and 200";
+			if(strlen($title) < 30 || strlen($title) > 200) {
+				$error_msg = "Title must be between 30 and 200";
 			}else if(strlen($content) < 500 || strlen($content) > 10000) {
 				$error_msg = "Content must be between 500 and 10000";
 			}else if(! empty($excerpt)){
-				if(strlen($excerpt) < 100 || strlen($excerpt) > 500) {
-					$error_msg = "Excerpt must be between 100 and 500";
+				if(strlen($excerpt) < 50 || strlen($excerpt) > 500) {
+					$error_msg = "Excerpt must be between 50 and 500";
 				}
 			}else {
 
