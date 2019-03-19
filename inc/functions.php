@@ -30,4 +30,53 @@ function get_home_posts($from, $to) {
 	}
 }
 
+function add_comment($datetime, $username, $email, $comment_comment, $post_id, $approve) {
+	$fields = array($datetime, $username, $email, $comment_comment);
+	include "connect.php";
+	$sql = "INSERT INTO comments (datetime, commenter_name, commenter_email, comment, post_id, approve) VALUES (?,?,?,?,?,?) ";
+
+	try{
+		$result = $con->prepare($sql);
+		for($i = 1; $i <= 4; $i++){
+			$result->bindValue($i, $fields[$i - 1], PDO::PARAM_STR);
+		}
+		$result->bindValue(5, $post_id, PDO::PARAM_INT);
+		$result->bindValue(1, $approve, PDO::PARAM_INT);
+		return $result->execute();
+	}catch(Exception $e) {
+		echo "Error: ". $e->getMessage();
+		return false;
+	}
+}
+
+function get_posts_by_category($cat_name) {
+	include "connect.php";
+	$sql = "SELECT * FROM posts WHERE category = ? ";
+	try {
+		$result = $con->prepare($sql);
+		$result->bindValue(1,$cat_name,PDO::PARAM_STR);
+		$result->execute();
+		return $result->fetchAll(PDO::FETCH_ASSOC);
+	}
+	catch(Exception $e) {
+		echo "Error: ".$e->getMessage();
+		return false;
+	}
+}
+
+function get_posts_by_author($author) {
+	include "connect.php";
+	$sql = "SELECT * FROM posts WHERE author = ? ";
+	try {
+		$result = $con->prepare($sql);
+		$result->bindValue(1,$author,PDO::PARAM_STR);
+		$result->execute();
+		return $result->fetchAll(PDO::FETCH_ASSOC);
+	}
+	catch(Exception $e) {
+		echo "Error: ".$e->getMessage();
+		return false;
+	}
+}
+
 ?>

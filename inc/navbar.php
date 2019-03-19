@@ -8,18 +8,18 @@
 
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand logo" href="#"><span>ZB</span><span>log</span></a>
+  <a class="navbar-brand logo" href=""><span>ZB</span><span>log</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item <?php echo $home; ?>">
+        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+      <li class="nav-item <?php echo $about; ?> ">
+        <a class="nav-link" href="about.php">About</a>
       </li>
 <!--       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,8 +32,8 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li> -->
-      <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contact</a>
+      <li class="nav-item <?php echo $contact; ?> ">
+        <a class="nav-link" href="contact.php" tabindex="-1" aria-disabled="true">Contact</a>
       </li>
       <li class="nav-item">
         <a class="nav-link search" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-search"></i></a>
@@ -43,7 +43,7 @@
         </form>
       </li>
       <li class="nav-item">
-        <a class="nav-link sign-in" href="#" tabindex="-1" aria-disabled="true">Sign-in</a>
+        <a class="nav-link sign-in" href="signin.php" tabindex="-1" aria-disabled="true">Sign-in</a>
       </li>
     </ul>
   </div>

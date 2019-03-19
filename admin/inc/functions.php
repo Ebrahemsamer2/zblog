@@ -117,7 +117,12 @@ function get_posts($id = "") {
 	}
 	catch(Exception $e) {
 		echo "Error: ".$e->getMessage();
-		return array();
+		if(empty($id)){
+			return array();	
+		}else {
+			return false;
+		}
+		
 	}
 }
 
@@ -377,7 +382,7 @@ function approve($id) {
 
 }
 
-function get_post_comments($approve, $id = "") {
+function get_post_comments_number($approve, $id = "") {
 	include "connect.php";
 	$sql = "";
 	if(empty($id)) {
@@ -394,7 +399,24 @@ function get_post_comments($approve, $id = "") {
 		echo "Error: ". $e->getMessage();
 		return 0;
 	}
+}
 
+function get_post_comments($approve, $id = "") {
+	include "connect.php";
+	$sql = "";
+	if(empty($id)) {
+		$sql = "SELECT * FROM comments WHERE approve = $approve";
+	}else {
+		$sql = "SELECT * FROM comments WHERE approve = $approve AND post_id = $id ";
+	}
+	try{
+		$result = $con->prepare($sql);
+		$result->execute();
+		return $result->fetchAll(PDO::FETCH_ASSOC);
+	}catch(Exception $e) {
+		echo "Error: ". $e->getMessage();
+		return 0;
+	}
 }
 
 /* Setting Functions */
