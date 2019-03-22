@@ -10,7 +10,8 @@
 .btn-default:hover {
 	color: #fff;
 }
-.add-comment .error {
+.add-comment .error,
+.contact .error {
 	color: red;
 	font-size: 14px;
 	margin-left: 10px;
@@ -410,7 +411,7 @@ nav ul.pagination {
 
 .contact {
 	width: 100%;
-	background: #2c3033;
+	background: #1b1d1f;
 	padding: 50px 0 50px 0; 
 }
 .contact .form form div.form-group:nth-child(4) {
@@ -424,10 +425,9 @@ nav ul.pagination {
 	margin-bottom: 10px;
 	color: #fff;
 }
-.contact .form p {
+.contact .form > p {
 	color: #fff;
 	margin-bottom: 20px;
-
 }
 .contact .form form input[type='text'],
 .contact .form form input[type='email'],
@@ -442,7 +442,7 @@ nav ul.pagination {
 /* Sign in Page Style */
 
 .registeration {
-	background: #2C3033;
+	background: #1b1d1f;
 	height: 100vh;
 }
 
@@ -471,4 +471,14 @@ div.signup{
 .registeration a.logo span:nth-child(1),
 .registeration a.logo span:nth-child(2) {
 	font-size: 35px;
+}
+
+.registeration .signup,
+.registeration .signin {
+	position: relative;
+}
+.registeration .signup .alert,
+.registeration .signin .alert{
+	position: absolute;
+	top: -55px;
 }

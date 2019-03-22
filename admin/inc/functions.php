@@ -263,7 +263,6 @@ function is_admin($email) {
 		echo "Error: ". $e->getMessage();
 		return false;
 	}
-
 }
 
 function update_reset_password_code($email) {

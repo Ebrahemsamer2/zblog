@@ -78,5 +78,35 @@ function get_posts_by_author($author) {
 		return false;
 	}
 }
+function add_user($username, $email, $hashed_password) {
+	include "connect.php";
+	$sql = "INSERT INTO users (username, email, password) VALUES (?,?,?) ";
+	try {
+		$result = $con->prepare($sql);
+		$result->bindValue(1, $username, PDO::PARAM_STR);
+		$result->bindValue(2, $email, PDO::PARAM_STR);
+		$result->bindValue(3, $hashed_password, PDO::PARAM_STR);
+		return $result->execute();
+	}
+	catch(Exception $e) {
+		echo "Error: " . $e->getMessage();
+		return false;
+	}
+}
+
+function is_user($email) {
+	include "connect.php";
+	$sql = "SELECT * FROM users WHERE email = ? ";
+	try {
+		$result = $con->prepare($sql);
+		$result->bindValue(1, $email, PDO::PARAM_STR);
+		$result->execute();
+		return $result->fetch(PDO::FETCH_ASSOC);
+	}
+	catch(Exception $e) {
+		echo "Error: ". $e->getMessage();
+		return false;
+	}
+}
 
 ?>

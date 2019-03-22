@@ -46,4 +46,42 @@ $(function() {
 		return true;
 	});
 
+	//  Contact Validation
+	$(".contact form").submit(function() {
+		var username, email, subject, message;
+
+		username = $(".contact form input[name='username']").val(); 
+		email = $(".contact form input[name='email']").val();
+		subject = $(".contact form input[name='email']").val();
+		message = $(".contact form textarea").val();
+
+		if(username.length < 8 || username.length > 20) {
+			$(".contact form p.username-error").fadeIn(500);
+			return false;
+		}else {
+			$(".contact form p.username-error").fadeOut(500);
+		}
+
+		if(email.length <= 10 || email.length > 100) {
+			$(".contact form p.email-error").fadeIn(500);
+			return false;
+		}else {
+			$(".contact form p.email-error").fadeOut(500);
+		}
+		if(subject.length <= 50 || subject.length > 100) {
+			$(".contact form p.subject-error").fadeIn(500);
+			return false;
+		}else {
+			$(".contact form p.subject-error").fadeOut(500);
+		}
+
+		if(message.length < 20 || message.length > 500) {
+			$(".contact form p.message-error").fadeIn(500);
+			return false;
+		}else {
+			$(".contact form p.message-error").fadeOut(500);
+		}
+		return true;
+	});
+
 });

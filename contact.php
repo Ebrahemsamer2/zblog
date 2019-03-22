@@ -89,16 +89,20 @@
 			<form action="contact.php" method="POST">
 				<div class="form-group">
 					<input class="form-control" type="text" name="username" placeholder="Username" autocomplete="off" required>	
+					<p class="error username-error">Username must be between 8, 20 Characters</p>
 				</div>
 				<div class="form-group">
 					<input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off" required>	
+					<p class="error email-error">Email must be between 11, 100 Characters</p>
 				</div>
 				<div class="form-group">
 					<input class="form-control" type="text" name="subject" placeholder="Subject" autocomplete="off" required>	
+					<p class="error subject-error">Subject must be between 5, 100 Characters</p>
 				</div>
 				<div class="form-group">
 					<textarea rows="5" class="form-control" name="message" placeholder="Your Message" autocomplete="off" required ></textarea>
 					<input type="submit" value="Send Message" name="sendmessage" class="btn btn-default">
+					<p class="error message-error">Your Message must be between 20, 100 Characters</p>
 					<div class="clearfix"></div>
 				</div>
 

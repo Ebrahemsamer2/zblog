@@ -1,11 +1,11 @@
 <?php 
 
 	$dsn = "mysql:host=localhost;dbname=zblog";
-	$username = "root";
+	$dbusername = "root";
 	$dbpassword = "";
 
 	try {
-		$con = new PDO($dsn, $username, $dbpassword);
+		$con = new PDO($dsn, $dbusername, $dbpassword);
 		$con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 	}
 	catch(Exception $e) {
