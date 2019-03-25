@@ -28,6 +28,7 @@ body.login-style {
 }
 
 /*  Errors Style */
+.users .alert,
 .posts .alert,
 .categories .alert,
 .admins .alert,
@@ -149,7 +150,8 @@ h6 {
 .admins h4,
 .comment h4,
 .approved-comments h4,
-.unapproved-comments h4 {
+.unapproved-comments h4,
+.users h4 {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }

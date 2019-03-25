@@ -9,7 +9,7 @@
 
 
 <div class="container">
-	<div class="about">
+	<div class="about-page">
 		<h1>About</h1>
 		<div class="row">
 			

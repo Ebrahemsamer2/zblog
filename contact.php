@@ -54,7 +54,7 @@
 
 
 
-<div class="contact">
+<div class="contact-page">
 	<div class="container">
 		<div class="form">
 

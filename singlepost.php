@@ -1,4 +1,9 @@
 <?php include "inc/header.php"; ?>
+<?php 
+	$about = "";
+	$home = "active";
+	$contact = "";
+?>
 <?php include "inc/navbar.php"; ?>
 
 

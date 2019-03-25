@@ -39,10 +39,9 @@
 					  <thead>
 					    <tr>
 					      <th scope="col">#</th>
-					      <th scope="col">Created_at</th>
 					      <th scope="col">Username</th>
+					      <th scope="col">Email</th>
 					      <th scope="col">Image</th>
-					      <th scope="col">Role Type</th>
 					      <th scope="col">Actions</th>
 					    </tr>
 					  </thead>
@@ -50,33 +49,33 @@
 
 					  	<?php
 					  	$number = 0;
-					  	foreach(get_admins() as $admin) { $number++; ?>
+					  	foreach(get_users() as $user) { $number++; ?>
 
 					    <tr>
 					      <th scope="row"><?php echo $number; ?></th>
-					      <td><?php echo $admin['datetime']; ?></td>
 					      <td>
 					      	<?php 
-					      	echo $admin['username'];
+					      	echo $user['username'];
 					      	?>
 					      </td>
 					      <td>
-					      	<?php if(! empty($admin['image'])) { ?>
-					      	<img class="" alt="Admin Banner" height="100" width="100" src="uploads/admins/<?php echo $admin['image']; ?>">	
+					      	<?php 
+					      	echo $user['email'];
+					      	?>
+					      </td>
+					      <td>
+					      	<?php if(! empty($user['image'])) { ?>
+					      	<img class="" alt="User Banner" height="100" width="100" src="uploads/users/<?php echo $user['image']; ?>">	
 					      <?php  } else {
 					      	echo "No Image";
 					      }
 					      ?>
 					      </td>
 
-					      <td><?php echo $admin['role_type']; ?></td>
-
-
 					      <td class="action-links">
-					      	<a class="btn btn-primary btn-sm" href="admin.php?id=<?php echo $admin['id']; ?>">Edit</a>
-					      	<form onsubmit="return confirm('Are You Sure?');" action="deleteadmin.php" method="POST">
-					      		<input type="hidden" name="id" value="<?php echo $admin['id']; ?>">
-					      		<input class="btn btn-danger btn-sm" type="submit" value="Delete" name="deleteadmin">
+					      	<form onsubmit="return confirm('Are You Sure?');" action="deleteuser.php" method="POST">
+					      		<input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+					      		<input class="btn btn-danger btn-sm" type="submit" value="Delete" name="deleteuser">
 					      	</form>
 					      </td>
 					    </tr>
@@ -85,7 +84,6 @@
 
 					  </tbody>
 					</table>
-					<a class="btn btn-info" style="float: right;" href="admin.php">Add New Admin</a>
 				</div>
 			</div>
 

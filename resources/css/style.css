@@ -23,6 +23,12 @@
 .clearfix {
 	clear: both;
 }
+.pagination .page-item {
+	font-size: 17px;
+}
+
+/* Header Style */
+
 .header {
 	height: 250px;
 	background: linear-gradient( rgba(0,0,0,.5),rgba(0,0,0,.5) ), url(../../1.jpg);
@@ -117,7 +123,26 @@
     top: -12px;
 }
 
-
+.navbar ul li.dropdown a.nav-link:hover {
+	border-bottom: none;
+}
+.navbar ul li.dropdown a.nav-link {
+	border-bottom: none;
+}
+.navbar ul li div.dropdown-menu {
+	left: -5px;
+	background: #232323;
+	padding: .2rem 0;
+}
+.navbar ul li div.dropdown-menu a.dropdown-item {
+	background: #232323;
+	border-bottom: none;
+	margin-left: 0;
+}
+.navbar ul li div.dropdown-menu a.dropdown-item:hover {
+	border-bottom: none;
+	background: #2d2d2d;
+}
 /* Home Style  */
 
 .posts {
@@ -390,14 +415,14 @@ nav ul.pagination {
 
 /* About Page Style */
 
-.about {
+.about-page {
 	margin-top: 50px;
 	padding: 10px;
 }
-.about h1 {
+.about-page h1 {
 	margin-bottom: 30px;
 }
-.about p {
+.about-page p {
 	color: #383838;
 	font-size: 16px;
 }
@@ -409,29 +434,29 @@ nav ul.pagination {
 
 /* Contact Page Style */
 
-.contact {
+.contact-page {
 	width: 100%;
 	background: #1b1d1f;
 	padding: 50px 0 50px 0; 
 }
-.contact .form form div.form-group:nth-child(4) {
+.contact-page .form form div.form-group:nth-child(4) {
 	margin: 0;
 }
-.contact .form {
+.contact-page .form {
 	width: 500px;
 	margin: 0 auto;
 }
-.contact .form h1 {
+.contact-page .form h1 {
 	margin-bottom: 10px;
 	color: #fff;
 }
-.contact .form > p {
+.contact-page .form > p {
 	color: #fff;
 	margin-bottom: 20px;
 }
-.contact .form form input[type='text'],
-.contact .form form input[type='email'],
-.contact .form form textarea {
+.contact-page .form form input[type='text'],
+.contact-page .form form input[type='email'],
+.contact-page .form form textarea {
 	background: #2c3033;;
 	border-color: #fff;
 	color: #fff;
@@ -481,4 +506,23 @@ div.signup{
 .registeration .signin .alert{
 	position: absolute;
 	top: -55px;
+}
+
+
+/* User Profile Style */
+
+.user-profile {
+	margin-top: 50px;
+}
+.user-profile h4 {
+	margin-bottom: 20px;
+	margin-left: 0px;
+}
+.user-profile .user-image {
+	margin-bottom: 50px;
+}
+
+.user-profile .user-general,
+.user-profile .user-password {
+	margin-bottom: 30px;
 }

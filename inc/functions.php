@@ -109,4 +109,33 @@ function is_user($email) {
 	}
 }
 
+
+function update_user($username, $new_email, $img_name, $id) {
+	$fields = array($username,$new_email,$img_name);
+	include "connect.php";
+	$sql = "";
+	if(empty($img_name)){
+		$sql = "UPDATE users SET username = ?, email = ? WHERE id = ? ";
+	}else {
+		$sql = "UPDATE users SET username = ?, email = ?, image = ? WHERE id = ?";
+	}
+	try {
+
+		$result = $con->prepare($sql);
+		for($i = 1; $i <= 2; $i++){
+			$result->bindValue($i, $fields[$i - 1], PDO::PARAM_STR);
+		}
+
+		if(! empty($img_name)) {
+			$result->bindValue(3, $img_name, PDO::PARAM_STR);
+			$result->bindValue(4,$id,PDO::PARAM_INT);
+		}else {
+			$result->bindValue(3,$id,PDO::PARAM_INT);
+		}
+		return $result->execute();
+	}catch(Exception $e) {
+		echo "Error: " .$e->getMessage();
+		return false;
+	}
+}
 ?>

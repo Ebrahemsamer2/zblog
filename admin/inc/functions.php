@@ -280,6 +280,37 @@ function update_reset_password_code($email) {
 	}
 
 }
+
+
+// User Function
+
+function get_users($id = "") {
+	include "connect.php";
+	$sql = "";
+	if(empty($id)){
+		$sql = "SELECT * FROM users ORDER BY id DESC";
+	}else {
+		$sql = "SELECT * FROM users WHERE id = ? ";
+	}
+	try {
+
+		if(! empty($id)) {
+			$result = $con->prepare($sql);
+			$result->bindValue(1, $id, PDO::PARAM_INT);
+			$result->execute();
+			return $result->fetch(PDO::FETCH_ASSOC);
+		}else {
+			$result = $con->query($sql);
+			return $result;
+		}
+	}
+	catch(Exception $e) {
+		echo "Error: ".$e->getMessage();
+		return array();
+	}
+}
+
+
 /* Comment Functions  */
 
 function get_all_comments($approve) {

@@ -5,7 +5,7 @@
     $home_posts_number = $setting['home_posts_number'];
   }
 ?>
-
+<?php if(! session_id()){ session_start(); } ?>
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light">
   <a class="navbar-brand logo" href=""><span>ZB</span><span>log</span></a>
@@ -21,17 +21,6 @@
       <li class="nav-item <?php echo $about; ?> ">
         <a class="nav-link" href="about.php">About</a>
       </li>
-<!--       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> -->
       <li class="nav-item <?php echo $contact; ?> ">
         <a class="nav-link" href="contact.php" tabindex="-1" aria-disabled="true">Contact</a>
       </li>
@@ -42,9 +31,25 @@
           <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
         </form>
       </li>
+      <?php 
+        if(isset($_SESSION['user_username']) && ! empty($_SESSION['user_username'])) { ?>
+
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <?php echo $_SESSION['user_username']; ?>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="profile.php">Edit Profile</a>
+          <a class="dropdown-item" href="logout.php">Logout</a>
+        </div>
+      </li>
+
+      <?php  } else {
+      ?>
       <li class="nav-item">
         <a class="nav-link sign-in" href="signin.php" tabindex="-1" aria-disabled="true">Sign-in</a>
       </li>
+    <?php } ?>
     </ul>
   </div>
 </nav>

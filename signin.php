@@ -145,7 +145,7 @@
 					</div>
 					<div class="form-group">
 						<input type="password" name="password" placeholder="Password" required class="form-control">
-						<input type="submit" value="Sign-in" name="signin" class="btn btn-default">
+						<input type="submit" value="Login" name="signin" class="btn btn-default">
 					</div>
 				</form>
 			</div>
