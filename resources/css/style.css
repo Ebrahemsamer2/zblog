@@ -11,7 +11,7 @@
 	color: #fff;
 }
 .add-comment .error,
-.contact .error {
+.contact-page .error {
 	color: red;
 	font-size: 14px;
 	margin-left: 10px;
@@ -526,3 +526,13 @@ div.signup{
 .user-profile .user-password {
 	margin-bottom: 30px;
 }
+
+.user-profile .user-general .alert,
+.user-profile .user-password .alert {
+	position: absolute;
+	top: -60px;
+}
+.user-profile .user-password .alert {
+	left: 180px;
+}
+

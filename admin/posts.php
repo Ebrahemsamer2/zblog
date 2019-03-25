@@ -86,11 +86,11 @@
 					      ?>
 					      </td>
 					      <td>
-					      	<?php if(get_post_comments(1,$post['id'])) {
-					      		echo "<span class='badge badge-success'>". get_post_comments(1,$post['id']) ."</span>";	
+					      	<?php if(get_post_comments_number(1,$post['id'])) {
+					      		echo "<span class='badge badge-success'>". get_post_comments_number(1,$post['id']) ."</span>";	
 					      	} ?>
-					      	<?php if(get_post_comments(0,$post['id'])) {
-					      		echo "<span style='float: right;' class='badge badge-warning'>". get_post_comments(0,$post['id']) ."</span>";	
+					      	<?php if(get_post_comments_number(0,$post['id'])) {
+					      		echo "<span style='float: right;' class='badge badge-warning'>". get_post_comments_number(0,$post['id']) ."</span>";	
 					      	} ?>
 					      </td>
 					      <td><?php echo $post['author']; ?></td>

@@ -138,4 +138,22 @@ function update_user($username, $new_email, $img_name, $id) {
 		return false;
 	}
 }
+
+
+function update_user_password($hashed_password, $email) {
+
+	include "connect.php";
+	$sql = "UPDATE users SET password = ? WHERE email = ? ";
+	try{
+		$result = $con->prepare($sql);
+		$result->bindValue(1,$hashed_password,PDO::PARAM_STR);
+		$result->bindValue(2,$email,PDO::PARAM_STR);
+		return $result->execute();
+	}catch(Exception $e){
+		echo "Error: ". $e->getMessage();
+		return false;
+	}
+
+}
+
 ?>

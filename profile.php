@@ -56,9 +56,16 @@
 						session_start();
 					}
 					if(update_user($username, $new_email, $img_name, $id)) {
-						$_SESSION['user_success'] = "Your Info has Updated";
+						if(! empty($img_name)) {
+							$new_path = "uploads/users/".$img_name;
+							move_uploaded_file( $img_tmp_name, $new_path);
+						}
+						$_SESSION['data_success'] = "Your Info has Updated";
+						$_SESSION['user_username'] = $username;
+						$_SESSION['user_email'] = $new_email;
+						header("Location: profile.php");
 					}else {
-						$_SESSION['user_error'] = "Your Info has not Updated";
+						$_SESSION['data_error'] = "Your Info has not Updated";
 					}
 
 				} else {
@@ -68,7 +75,7 @@
 						if(! session_id()){
 							session_start();
 						}
-						$_SESSION['user_error'] = "Your Info has not Updated";
+						$_SESSION['data_error'] = "Your Info has not Updated";
 					
 					} else {
 
@@ -76,17 +83,61 @@
 							session_start();
 						}
 						if(update_user($username, $new_email, $img_name, $id)) {
-							$_SESSION['user_success'] = "Your Info has Updated";
+							if(! empty($img_name)) {
+								$new_path = "uploads/users/".$img_name;
+								move_uploaded_file( $img_tmp_name, $new_path);
+							}
+							$_SESSION['data_success'] = "Your Info has Updated";
+							$_SESSION['user_username'] = $username;
+							$_SESSION['user_email'] = $new_email;
+							header("Location: profile.php");
 						}else {
-							$_SESSION['user_error'] = "Your Info has not Updated";
+							$_SESSION['data_error'] = "Your Info has not Updated";
 						}
 
 					}
 
 				}
 
+			} else {
+
+				if(! session_id()){
+					session_start();
+				}
+				$_SESSION['data_error'] = $error_msg;
 			}
 
+
+		} else {
+
+			if(isset($_POST['updatepassword'])) {
+
+				$email = filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL);
+				$password = filter_input(INPUT_POST,'password',FILTER_SANITIZE_STRING);
+				$confirmpassword = filter_input(INPUT_POST,'confirmpassword',FILTER_SANITIZE_STRING);
+
+				$error_msg = "";
+				if(strlen($password) < 6 || strlen($password) > 15) {
+					$error_msg = "Password Length must between 6, 15 Characters";
+				}else if($password !== $confirmpassword) {
+					$error_msg = "Password is not Identucal to Confirm Password";
+				}
+				if(! session_id()){
+					session_start();
+				}
+				if(empty($error_msg)) {
+					$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+					if(update_user_password($hashed_password, $email)) {
+						$_SESSION['password_success'] = "Password has Changed";
+
+					}else {
+						$_SESSION['password_error'] = "Password has not Changed";
+					}
+				}else {
+					$_SESSION['password_error'] = $error_msg;
+				}
+
+			}
 
 		}
 
@@ -122,6 +173,28 @@
 				<div class="col-md">
 					
 					<div class="user-general">
+						<?php 
+						if(! session_id()){
+							session_start();
+						}
+						if(isset($_SESSION['data_error']) && ! empty($_SESSION['data_error'])) { ?>
+							<div class="alert alert-danger">
+								<?php echo $_SESSION['data_error']; ?>
+							</div>
+							<?php $_SESSION['data_error'] = ""; ?>
+						<?php }
+						?>
+						<?php 
+						if(! session_id()){
+							session_start();
+						}
+						if(isset($_SESSION['data_success']) && ! empty($_SESSION['data_success'])) { ?>
+							<div class="alert alert-success">
+								<?php echo $_SESSION['data_success']; ?>
+							</div>
+							<?php $_SESSION['data_success'] = ""; ?>
+						<?php }
+						?>
 						<form action="profile.php" method="POST" enctype="multipart/form-data">
 							
 							<div class="form-group">
@@ -175,6 +248,28 @@
 
 				<div class="col-md">
 					<div class="user-password">
+						<?php 
+						if(! session_id()){
+							session_start();
+						}
+						if(isset($_SESSION['password_error']) && ! empty($_SESSION['password_error'])) { ?>
+							<div class="alert alert-danger">
+								<?php echo $_SESSION['password_error']; ?>
+							</div>
+							<?php $_SESSION['password_error'] = ""; ?>
+						<?php }
+						?>
+						<?php 
+						if(! session_id()){
+							session_start();
+						}
+						if(isset($_SESSION['password_success']) && ! empty($_SESSION['password_success'])) { ?>
+							<div class="alert alert-success">
+								<?php echo $_SESSION['password_success']; ?>
+							</div>
+							<?php $_SESSION['password_success'] = ""; ?>
+						<?php }
+						?>
 						<form action="profile.php" method="POST">
 							
 							<div class="form-group">
@@ -185,6 +280,7 @@
 										<label for="password">Password: </label>
 									</div>
 									<div class="col-md-8">
+										<input type="hidden" name="email" value="<?php echo $user['email'] ?>">
 										<input id="password" type="password" name="password" class="form-control">
 									</div>
 
@@ -200,7 +296,7 @@
 									</div>
 									<div class="col-md-8">
 										<input id="confirmpassword" type="password" name="confirmpassword" class="form-control">
-										<input type="submit" value="Update Password" name="savedata" class="btn btn-default">
+										<input type="submit" value="Update Password" name="updatepassword" class="btn btn-default">
 									</div>
 
 								</div>
